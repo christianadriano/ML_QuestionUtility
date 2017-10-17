@@ -25,10 +25,40 @@ set.seed(8850);
 g<- runif((nrow(summaryTable))); #generates a random distribution
 summaryTable <- summaryTable[order(g),];
 
-#confidence + difficulty 
+
+#Confidence + Difficulty 
+#loop from n=2 to 19 answers (start with a seed size of two answers)
+##Monte carlo simulation (1000)
+###sample n answers from ALL questions
+###compute utility_confidence_div_difficulty
+###computeranking based on utility
+###get top three questions 
+####Montecarlo Simulation (1000 times)
+####sample 2 to 19 answers from the top three questions
+####append these answers to each of the three questions
+#####compute ranking 
+#####get top two questions and compute TP, FP, FN, TN
+#####compute precision, recall, sentitivity, sensibility
+####average the outcomes over the 1000 datapoints
+####store it.
+##average across 
+
+#Rank question based on confidence only, difficulty only, confidence/difficulty
+#Look that the past, because I don't have the answer yet when I am deciding which question to ask
+
+Monte Carlo
+# Sample answer from top question
+# 
+
+#After I rank, what do I do?
+#Compute the metric after every new answer (MonteCarlo simulation)
+
 
 #duration + explanation size
 
+
 #code size + complexity
 
+
 #profession 
+
