@@ -73,3 +73,13 @@ computeSensibility<- function(bugCoveringList, predictedBugCovering){
   
   return ((TP)/(FN+TP));
 }
+
+
+predictedFaults<-function(questionRanking){
+  
+}
+
+
+computeOutcomes<- function(answersF){
+  
+}
