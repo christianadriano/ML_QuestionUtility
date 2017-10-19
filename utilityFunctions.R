@@ -62,7 +62,9 @@ questionID_f <- data.frame(unique(answers_df$Question.ID));
 colnames(questionID_f)<- c("id");
 sampled_dataf<-sampleAnswers(questionList=questionID_f,answers_df = dataf, sampleSize = 5);
 
-#compute precision recall
+#### compute precision recall
+
+bugCoveringPredictedList <- selectPredictedBugs(rankedSelection = sampled_dataf);
 confusionTable<- computeOutcomes(sampled_dataf);
 
 #compute utility
