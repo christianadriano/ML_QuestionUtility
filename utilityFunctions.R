@@ -48,24 +48,25 @@ sampleAnswers<- function(questionList, answers_df, sampleSize){
     sampled_df<- sample_n(questionSet, sampleSize)
     sampled_dataf<-rbind(sampled_dataf,sampled_df);
   }
-  
   return(sampled_dataf);
-  
 }
 
 
 
 source("C://Users//chris//OneDrive//Documentos//GitHub//ML_QuestionUtility//computeConfusionMatrix.R");
+#Initialize variables
+accumOutcomes<- list();
+
 
 #start with minimal answers (5 per question)
 questionID_f <- data.frame(unique(answers_df$Question.ID));
 colnames(questionID_f)<- c("id");
 sampled_dataf<-sampleAnswers(questionList=questionID_f,answers_df = dataf, sampleSize = 5);
 
-#### compute precision recall
-
+#### compute precision recall accuracy sensibility sensitivity
 bugCoveringPredictedList <- selectPredictedBugs(rankedSelection = sampled_dataf);
-confusionTable<- computeOutcomes(sampled_dataf);
+outcomesf<- computeOutcomes(bugCoveringPredictedList);
+accumOutcomes <- rbind(accumOutcomes,outcomesf);
 
 #compute utility
 utility_table<-confidence_utility(df=sampled_dataf);
