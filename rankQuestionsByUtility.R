@@ -34,7 +34,7 @@ summaryTable <- summaryTable[order(g),];
 ###computeranking based on utility
 ###get top three questions 
 ####Montecarlo Simulation (1000 times)
-####sample 2 to 19 answers from the top three questions
+####loop sample 2 to 19 answers from the top three questions
 ####append these answers to each of the three questions
 #####compute ranking 
 #####get top two questions and compute TP, FP, FN, TN
