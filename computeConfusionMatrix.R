@@ -74,12 +74,20 @@ computeSensibility<- function(bugCoveringList, predictedBugCovering){
   return ((TP)/(FN+TP));
 }
 
-
-predictedFaults<-function(questionRanking){
+computeOutcomes<- function(predictedBugCoveringList,bugCoveringList){
   
+  outcomes<- list(precision=1, recall=0, sensibility=0, sensitivity=0, accuracy=0);
+
+  outcomes$precision <- computePrecision(bugCoveringList,predictedBugCoveringList);
+  outcomes$recall <- computeRecall(bugCoveringList,predictedBugCoveringList);
+  outcomes$sensible <- computeSensible(bugCoveringList,predictedBugCoveringList);
+  outcomes$sensitivity <- computeSensitivity(bugCoveringList,predictedBugCoveringList);
+  outcomes$accuracy <- computeAccuracy(bugCoveringList,predictedBugCoveringList);
+  outcomesf<-data.frame(outcomes);
+  return(outcomesf);
 }
 
 
-computeOutcomes<- function(answersF){
-  
-}
+
+
+
