@@ -2,8 +2,10 @@
 #precision, recall, sensitivity, sensibility
 
 # Initialize Java method questions and bug covering data
-bugCoveringList <- c(1,4,10,14,20,23,30,32,55,56,57,58,59,72,73,77,84,92,95,97,102,104,115,119,123);
-totalBugCovering <- length(bugCoveringList);
+initialize<- function(){
+  bugCoveringList <- c(1,4,10,14,20,23,30,32,55,56,57,58,59,72,73,77,84,92,95,97,102,104,115,119,123);
+  totalBugCovering <- length(bugCoveringList);
+}
 
 computeTP<- function(bugCoveringList, predictedBugCovering){
   
@@ -77,7 +79,7 @@ computeSensibility<- function(bugCoveringList, predictedBugCovering){
 computeOutcomes<- function(predictedBugCoveringList,bugCoveringList){
   
   outcomes<- list(precision=1, recall=0, sensibility=0, sensitivity=0, accuracy=0);
-
+  
   outcomes$precision <- computePrecision(bugCoveringList,predictedBugCoveringList);
   outcomes$recall <- computeRecall(bugCoveringList,predictedBugCoveringList);
   outcomes$sensible <- computeSensible(bugCoveringList,predictedBugCoveringList);
