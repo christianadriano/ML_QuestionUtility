@@ -40,8 +40,8 @@ confidence_utility<-function(df){
   return(summaryTable);
 }
 
-#sample N answers for each question
-sampleAnswers<- function(questionList, answers_df, sampleSize){
+#sample N answers with replacement for each question
+sampleWithReplacement<- function(questionList, answers_df, sampleSize){
   sampled_dataf<-data.frame();
   for(id in questionList$id){
     questionSet<-answers_df[answers_df$Question.ID==id,]
@@ -52,32 +52,8 @@ sampleAnswers<- function(questionList, answers_df, sampleSize){
 }
 
 
-
-source("C://Users//chris//OneDrive//Documentos//GitHub//ML_QuestionUtility//computeConfusionMatrix.R");
-#Initialize variables
-accumOutcomes<- list();
-
-
-#start with minimal answers (5 per question)
-questionID_f <- data.frame(unique(answers_df$Question.ID));
-colnames(questionID_f)<- c("id");
-sampled_dataf<-sampleAnswers(questionList=questionID_f,answers_df = dataf, sampleSize = 5);
-
-#### compute precision recall accuracy sensibility sensitivity
-bugCoveringPredictedList <- selectPredictedBugs(rankedSelection = sampled_dataf);
-outcomesf<- computeOutcomes(bugCoveringPredictedList);
-accumOutcomes <- rbind(accumOutcomes,outcomesf);
-
-#compute utility
-utility_table<-confidence_utility(df=sampled_dataf);
-
-#sort by utility
-utility_table<-utility_table[order(utility_table$utility, decreasing = TRUE),];
-
-#take the top 5 and sample another 5 answers compute
-topQuestions<-utility_table[1:5,];
-
-#sample another 5 answers from these questions
-
+#sample N answers WITHOUT replacement for each question
+sampleWithoutReplacement<- function(questionList, answers_df, sampleSize){
+}
 
 
