@@ -1,4 +1,6 @@
 
+
+
 #Run a Monte Carlo simulation that selects questions based on utility function
 #Two nested simulations: sample answers to compute utility and sample answers to compute precision/recall
 
@@ -7,7 +9,11 @@
 # Initialize methods
 source("C://Users//chris//OneDrive//Documentos//GitHub//ML_QuestionUtility//computeConfusionMatrix.R");
 source("C://Users//chris//OneDrive//Documentos//GitHub//ML_QuestionUtility//utilityFunctions.R");
+source("C://Users//chris//OneDrive//Documentos//GitHub//ML_QuestionUtility//samplingFunctions.R");
 source("C://Users//chris//OneDrive//Documentos//GitHub//ML_VotingAggregation//aggregateVotes.R");
+source("C://Users//chris//OneDrive//Documentos//GitHub//ML_VotingAggregation//aggregateAnswerOptionsPerQuestion.R");
+
+
 
 # Import data
 source("C://Users//chris//OneDrive//Documentos//GitHub//ML_VotingAggregation//loadAllAnswers.R");
@@ -22,9 +28,10 @@ questionID_f <- data.frame(unique(answers_df$Question.ID));
 colnames(questionID_f)<- c("id");
 sampled_dataf<-sampleWithReplacement(questionList=questionID_f,answers_df = answers_df, sampleSize = 5);
 
-for(i in 1:4){
+#for(i in 1:4){
   #### compute precision recall accuracy sensibility sensitivity
-  bugCoveringPredictedList <- selectPredictedBugs(rankedSelection = sampled_dataf);
+  answersByQuestions_df <- runFromSample(sampled_dataf);
+  bugCoveringPredictedList <- selectPredictedBugs(rankedSelection = answersByQuestions_df);##BUGGY STILL
   outcomesf<- computeOutcomes(bugCoveringPredictedList);
   accumOutcomes <- rbind(accumOutcomes,outcomesf);
   
@@ -43,6 +50,6 @@ for(i in 1:4){
   
   ##Append the sampled answers to the exisintg answers of the top questions
   sampled_dataf <- rbind(sampled_dataf,sampledAnswers_topQuestions);
-}
+#}
 
 plot(accumOutcomes);
