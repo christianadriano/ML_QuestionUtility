@@ -3,14 +3,14 @@
 library(dplyr);
 
 #sample N answers with replacement for each question
-sampleWithReplacement<- function(questionList, answers_df, sampleSize){
-  sampled_dataf<-data.frame();
-  for(id in questionList$id){
-    questionSet<-answers_df[answers_df$Question.ID==id,]
+sampleWithReplacement<- function(questionList, population, sampleSize){
+  sample_final<-data.frame();
+  for(id in questionList$Question.ID){
+    questionSet<-population[population$Question.ID==id,]
     sampled_df<- dplyr::sample_n(questionSet, sampleSize)
-    sampled_dataf<-rbind(sampled_dataf,sampled_df);
+    sample_final<-rbind(sample_final,sampled_df);
   }
-  return(sampled_dataf);
+  return(sample_final);
 }
 
 
