@@ -15,7 +15,7 @@ source("C://Users//chris//OneDrive//Documentos//GitHub//ML_VotingAggregation//ag
 
 # Import data
 source("C://Users//chris//OneDrive//Documentos//GitHub//ML_VotingAggregation//loadAllAnswers.R");
-answers_df <- loadAnswers("answerList_data.csv");
+answerPopulation_df <- loadAnswers("answerList_data.csv");
 
 #Initialize variables
 accumStatistics<- list(precision=0, recall=0, sensitivity=0, accuracy=0, answers=0);
@@ -30,13 +30,13 @@ answerSamplingStep <- 2;
 rankingTop <- 2;
 
 #start with one answer
-questionID_f <- data.frame(unique(answers_df$Question.ID));
+questionID_f <- data.frame(unique(answerPopulation_df$Question.ID));
 colnames(questionID_f)<- c("Question.ID");
 
 #Sample with replacement fits the assumptions of infinite population, unknown distribution, 
 #and equal probability of any programmer to provide an answer
 sampled_dataf<-sampleWithReplacement(questionList=questionID_f,
-                                     population = answers_df, 
+                                     population = answerPopulation_df, 
                                      sampleSize = answerSamplingStep);
 #sampled_dataf<-sampled_dataf[sampled_dataf$FailingMethod=="HIT01_8",];
 
@@ -57,7 +57,7 @@ for(i in 1:4){
   
   #sample more answers from these questions
   sampledAnswers_topQuestions<-sampleWithReplacement(questionList=topQuestions,
-                                                     population = answers_df, 
+                                                     population = answerPopulation_df, 
                                                      sampleSize = answerSamplingStep);
   
   ##Append the sampled answers to the exisintg answers of the top questions
