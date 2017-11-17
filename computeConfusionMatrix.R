@@ -13,11 +13,9 @@ computeStatistics<- function(predictedBugs,actualBugs){
   countMatch<- length(match(actualBugs,predictedBugs));
   TP <- countMatch;
   
-  FP <- countMatch - length(predictedBugs);
-  if(FP<0) FP <- 0;
+  FP <- abs(countMatch - dim(predictedBugs)[1]);
   
-  FN <- countMatch - length(actualBugs);
-  if(FN<0) FN <- 0;
+  FN <- abs(countMatch - length(actualBugs));
   
   TN <- 129 - TP - FP - FN;
   
