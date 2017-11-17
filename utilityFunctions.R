@@ -35,30 +35,30 @@ confidence_utility<-function(df){
   
   colnames(summaryTable)<-c("Question.ID","conf.1","conf.2","conf.3","conf.4","conf.5");
   
-  summaryTable["utility"]<-summaryTable$conf.1+2*summaryTable$conf.2+3*summaryTable$conf.3+
+  summaryTable["utility"]<-summaryTable$conf.1+2*summaryTable$conf.2+0*summaryTable$conf.3+
     4*summaryTable$conf.4+5*summaryTable$conf.5;
   return(summaryTable);
 }
 
-dificulty_utility<-function(df){
+difficulty_utility<-function(df){
   
   subset_df<-subset(df,select=c(Answer.difficulty))
   
   #mark all rows that match the selection
   diff.1<- rowSums(subset_df=="1"); 
-  subset_df["conf.1"] <- conf.1;
+  subset_df["diff.1"] <- diff.1;
   
   diff.2<- rowSums(subset_df=="2"); 
-  subset_df["conf.2"] <- conf.2;
+  subset_df["diff.2"] <- diff.2;
   
   diff.3<- rowSums(subset_df=="3"); 
-  subset_df["conf.3"] <- conf.3;
+  subset_df["diff.3"] <- diff.3;
   
   diff.4<- rowSums(subset_df=="4"); 
-  subset_df["conf.4"] <- conf.4;
+  subset_df["diff.4"] <- diff.4;
   
   diff.5<- rowSums(subset_df=="5"); 
-  subset_df["conf.5"] <- conf.5;
+  subset_df["diff.5"] <- diff.5;
   
   subset_df["QuestionID"] <- df$Question.ID;
   
@@ -72,8 +72,8 @@ dificulty_utility<-function(df){
   
   colnames(summaryTable)<-c("Question.ID","diff.1","diff.2","diff.3","diff.4","diff.5");
   
-  summaryTable["utility"]<-summaryTable$diff.1+2*summaryTable$diff.2+3*summaryTable$diff.3+
-    4*summaryTable$diff.4+5*summaryTable$diff.5;
+  summaryTable["utility"]<-(-2)*summaryTable$diff.5+(-1)*summaryTable$diff.4+0*summaryTable$diff.3+
+    4*summaryTable$diff.2+5*summaryTable$diff.1;
   return(summaryTable);
 }
 
