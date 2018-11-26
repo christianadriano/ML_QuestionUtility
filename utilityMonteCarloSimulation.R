@@ -3,6 +3,11 @@ library(ggplot2)
 
 #Run a Monte Carlo simulation that selects questions based on utility function
 #Two nested simulations: sample answers to compute utility and sample answers to compute precision/recall
+#Prints charts of number of answers per question and the levels of precision and recall at each iteration
+
+#TODO
+#Print results by Java method
+#Compute the probability of YES (two alternatives - MarkovChain and Bayesian Update)
 
 ######################################################################################################
 
