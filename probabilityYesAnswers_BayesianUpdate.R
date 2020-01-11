@@ -39,11 +39,21 @@ answers.
 
 In the future I will sample without replacement, hence will have to use hypergeometric distribution"
 
-# Prior on p (n assumed known), discretized
-probability_of_yes <- seq(0.01,0.99,0.001)
-prior <- dbeta(probability_of_yes,1,1)
-prior <- 1000 * pr / sum(prior)  # Have to normalize given discreteness
+"PRIOR FOR PROBABILITY OF YES,s
+When I know nothing, the probability of a YES answer is 1/3, 
+because the answer options are 3 in E2.
+"
+prior_prob_yes <- rbeta(1000,1,2)
+mean(prior_prob_yes)
+var(prior_prob_yes)
+plot(density(prior_prob_yes))
+
+number_yes_points <- seq(0,1,length.out = 20)
+prior <- dbeta(number_yes_points,1,2)
+prior <- dbeta(1/3,1,1)
+prior <- 1000 * prior / sum(prior)  # Have to normalize given discreteness
 plot(prior~probability_of_yes, col=1, ylim=c(0, 14), type="l")
+plot(prior)
 
 # Run for 20 samples
 for (i in 1:20) {
@@ -56,3 +66,13 @@ for (i in 1:20) {
   
   pr = ps
 }
+
+
+
+
+###############################333
+
+x <- rbeta(n=500, shape1=2, shape2=2)
+est.par <- eBeta(x);
+est.par
+plot(est.par)
