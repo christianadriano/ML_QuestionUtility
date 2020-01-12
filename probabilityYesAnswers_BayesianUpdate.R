@@ -1,8 +1,14 @@
 " 
 Simulate Bayesian Binomial updating
 "
+library(stringr)
 
+path <- "C://Users//Christian//Documents//GitHub//Complexity_Metrics//output//"
+dataset_E2 <- read.csv(str_c(path, "merged_tasks_complexity_E2.csv"))
+df_E2 <- data.frame(dataset_E2)
 
+task_id = 1
+df <- df_E2[df_E2$microtask_id==task_id,]
 
 sim_bayes<-function(p=0.5,N=10,y_lim=15)
 {
@@ -48,23 +54,17 @@ mean(prior_prob_yes)
 var(prior_prob_yes)
 plot(density(prior_prob_yes))
 
-number_yes_points <- seq(0,1,length.out = 20)
-prior <- dbeta(number_yes_points,1,2)
-prior <- dbeta(1/3,1,1)
-prior <- 1000 * prior / sum(prior)  # Have to normalize given discreteness
-plot(prior~probability_of_yes, col=1, ylim=c(0, 14), type="l")
-plot(prior)
 
+answerList <- df$answer
 # Run for 20 samples
-for (i in 1:20) {
-  prior <- 
+for (i in 1:length(answerList)) {
   p_likelihood <- 
   x <- rbinom(1, n, p) 
-  ps <- dbinom(x, n, p_values) * pr
-  ps <- 1000 * ps / sum(ps)
-  lines(ps~p_values, col=(i+1))
+  posterior <- dbinom(x, n, p_values) * pr
+  posterior <- 1000 * ps / sum(ps)
+  lines(posterior~p_values, col=(i+1))
   
-  pr = ps
+  prior = posterior
 }
 
 
