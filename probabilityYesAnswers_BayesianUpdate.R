@@ -49,22 +49,30 @@ In the future I will sample without replacement, hence will have to use hypergeo
 When I know nothing, the probability of a YES answer is 1/3, 
 because the answer options are 3 in E2.
 "
-prior_prob_yes <- rbeta(1000,1,2)
+prior_prob_yes <- rbeta(100,1,2)
 mean(prior_prob_yes)
 var(prior_prob_yes)
 plot(density(prior_prob_yes))
 
+prior <- prior_prob_yes
 
 answerList <- df$answer
 # Run for 20 samples
+i <- 1
+success = 0
+
+i <- i+1
 for (i in 1:length(answerList)) {
-  p_likelihood <- 
-  x <- rbinom(1, n, p) 
-  posterior <- dbinom(x, n, p_values) * pr
-  posterior <- 1000 * ps / sum(ps)
-  lines(posterior~p_values, col=(i+1))
+  if(answerList[i]=="YES_THERE_IS_AN_ISSUE"){
+    success <- success + 1
+  }
+  p <- success / i
+  p_likelihood <- rbinom(100, 1, p) 
+  plot(density(p_likelihood))
+  posterior <- p_likelihood * prior
+  plot(density(posterior))
   
-  prior = posterior
+  prior <-  posterior
 }
 
 
