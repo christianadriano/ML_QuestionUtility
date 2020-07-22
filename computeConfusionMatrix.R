@@ -8,24 +8,24 @@ initialize<- function(){
 
 computeStatistics<- function(predictedBugs,actualBugs){
   
-  statistics<- list(precision=0, recall=0, sensitivity=0, accuracy=0);
+  statistics_df <- data.frame(matrix(nrow=1,ncol=5))
+  colnames(statistics_df)  <- c("precision","recall","sensitivity", "accuracy","answers");
   
   countMatch<- length(match(actualBugs,predictedBugs));
   TP <- countMatch;
   
-  FP <- abs(countMatch - dim(predictedBugs)[1]);
+  FP <- abs(countMatch - length(predictedBugs));
   
   FN <- abs(countMatch - length(actualBugs));
   
   TN <- 129 - TP - FP - FN;
   
-  statistics$precision <-  (TP/(TP+FP));
-  statistics$recall <-  (TP/(TP+FN));
-  statistics$sensitivity <- ((TN)/(FP+TN));
-  statistics$accuracy <- ((TN+TP)/(FP+TN+TP+FN));
+  statistics_df$precision <-  (TP/(TP+FP));
+  statistics_df$recall <-  (TP/(TP+FN));
+  statistics_df$sensitivity <- ((TN)/(FP+TN));
+  statistics_df$accuracy <- ((TN+TP)/(FP+TN+TP+FN));
   
-  statistics_f <- data.frame(statistics);
-  return(statistics_f);
+  return(statistics_df);
 }
 
 
