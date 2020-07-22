@@ -56,9 +56,9 @@ for(i in 1:10){
   statistics_f$answers <- dim(sampled_dataf)[1];
   accumStatistics <- rbind(accumStatistics,statistics_f);
   
-  #compute utility
-  utility_table<-difficulty_utility(df=sampled_dataf);
-  
+  #compute utility (or expected utility depending on the flag)
+  utility_table<-difficulty_utility(df=sampled_dataf,is_expected_utility=TRUE);
+
   #select top questions from each JavaMethod
   topQuestions <- selectTopQuestionsByJavaMethod(utility_table,
                                                  sampled_dataf,
