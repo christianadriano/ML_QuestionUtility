@@ -11,15 +11,17 @@ library(ggplot2)
 
 ######################################################################################################
 
+path <- "C://Users//Christian//Documents//GitHub//"
+
 # Initialize methods
-source("C://Users//chris//OneDrive//Documentos//GitHub//ML_QuestionUtility//computeConfusionMatrix.R");
-source("C://Users//chris//OneDrive//Documentos//GitHub//ML_QuestionUtility//utilityFunctions.R");
-source("C://Users//chris//OneDrive//Documentos//GitHub//ML_QuestionUtility//samplingFunctions.R");
-source("C://Users//chris//OneDrive//Documentos//GitHub//ML_VotingAggregation//aggregateVotes.R");
-source("C://Users//chris//OneDrive//Documentos//GitHub//ML_VotingAggregation//aggregateAnswerOptionsPerQuestion.R");
+source(paste0(path,"ML_QuestionUtility//computeConfusionMatrix.R"));
+source(paste0(path,"ML_QuestionUtility//utilityFunctions.R"));
+source(paste0(path,"ML_QuestionUtility//samplingFunctions.R"));
+source(paste0(path,"ML_VotingAggregation//aggregateVotes.R"));
+source(paste0(path,"ML_VotingAggregation//aggregateAnswerOptionsPerQuestion.R"));
 
 # Import data
-source("C://Users//chris//OneDrive//Documentos//GitHub//ML_VotingAggregation//loadAllAnswers.R");
+source(paste0(path,"ML_VotingAggregation//loadAllAnswers.R"));
 answerPopulation_df <- loadAnswers("answerList_data.csv");
 
 #Initialize variables
@@ -90,7 +92,7 @@ plotOutcomes<- function(utilityType,U,R,A){
   
   
   ggsave(filename=name,last_plot(),device = "jpeg", 
-         path="C://Users//chris//OneDrive//Documentos//GitHub//ML_QuestionUtility//utilityPlots//");
+         path=paste0(path,"ML_QuestionUtility//utilityPlots//"));
   
   ggplot(sampled_dataf,aes(sampled_dataf$Question.ID)) + 
     geom_histogram(binwidth = 1) +
@@ -100,7 +102,7 @@ plotOutcomes<- function(utilityType,U,R,A){
   
   name <- paste(utilityType,i,hyperparam,"hist-plot.jpg");
   ggsave(filename=name,last_plot(),device = "jpeg",
-         path="C://Users//chris//OneDrive//Documentos//GitHub//ML_QuestionUtility//utilityPlots//");
+         path=paste0(path,"ML_QuestionUtility//utilityPlots//"));
 }
   
 #######################################
