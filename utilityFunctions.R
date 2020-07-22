@@ -40,7 +40,7 @@ confidence_utility<-function(df){
   return(summaryTable);
 }
 
-difficulty_utility<-function(df){
+difficulty_utility<-function(df, is_expected_utility){
   
   subset_df<-subset(df,select=c(Answer.difficulty))
   
@@ -74,7 +74,25 @@ difficulty_utility<-function(df){
   
   summaryTable["utility"]<-(-2)*summaryTable$diff.5+(-1)*summaryTable$diff.4+0*summaryTable$diff.3+
     4*summaryTable$diff.2+5*summaryTable$diff.1;
+  
+  if(is_expected_utility){#multiply the utility row by the current probability of YES
+    summaryTable <- expected_YES(df,summaryTable)
+  }
+  
   return(summaryTable);
+}
+
+expected_YES <- function(df,utility_table) {
+
+  df_yes <- df[c("Question.ID","Answer.option")]
+  tb <- table(df_yes)
+  df_expected_yes <- data.frame(list("Question.ID" = unlist(row.names(tb)),
+                                "Expected.YES" = tb[,"YES"]/rowSums(tb)
+                                )
+                           )
+  
+  utility_table$utility <- df_expected_yes$Expected.YES*utility_table$utility
+  return(utility_table)
 }
 
 
