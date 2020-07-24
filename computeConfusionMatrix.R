@@ -47,10 +47,10 @@ incremental_variance <- function(n,x,mean, current_variance){
 compute_regret <- function(question_id,actual_bugs){
   
   if(question_id %in% actual_bugs){
-    return(1);
+    return(0);
   }
   else
-    return(0);
+    return(1);
 }
 
 
