@@ -3,7 +3,7 @@
 
 library(dplyr);
 
-confidence_utility<-function(df){
+confidence_utility<-function(df,is_expected_utility){
   
   subset_df<-subset(df,select=c(Answer.confidence))
   
@@ -37,6 +37,11 @@ confidence_utility<-function(df){
   
   summaryTable["utility"]<-summaryTable$conf.1+2*summaryTable$conf.2+0*summaryTable$conf.3+
     4*summaryTable$conf.4+5*summaryTable$conf.5;
+  
+  if(is_expected_utility){#multiply the utility row by the current probability of YES
+    summaryTable <- expected_YES(df,summaryTable)
+  }
+  
   return(summaryTable);
 }
 
