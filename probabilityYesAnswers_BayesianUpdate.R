@@ -75,10 +75,34 @@ for (i in 1:length(answerList)) {
   prior <-  posterior
 }
 
+###############################
+"Example from https://www.r-bloggers.com/understanding-bayesian-inference-with-a-simple-example-in-r/
+check also - http://www.sumsar.net/ 
+Coin flipping experiment, which wemodel with a binomial distribution: binomial(n, p)
+n = the number of tosses
+p = probability to obtain a head. 
+
+Query: given the number of tosses and the number of heads (h), 
+what is the probability p of obtaining heads?
+
+"
+# Step 1) Set an initial value for p (prior)
+p <- runif(1, 0, 1)  #(random value from 0 to 1)
+
+#Step 2) Propose a new value of p, called p-prime.
+p_prime <- p + runif(1, -0.05, 0.05)
+
+#Step 3) Compute the acceptance probability of this new value for the parameter. 
+#We have to check if the new value improves the posterior probability given our data. 
+#This can be seen as the ratio: Pr(p_prime|h) / Pr(p|h).
+
+"The advantage of this method is that we avoid to compute the marginal likelihood, 
+that is often difficult to obtain with more complex models.
+
+Let's stop here a little bit to explain each term of this equation."
 
 
-
-###############################333
+###############################
 
 x <- rbeta(n=500, shape1=2, shape2=2)
 est.par <- eBeta(x);
